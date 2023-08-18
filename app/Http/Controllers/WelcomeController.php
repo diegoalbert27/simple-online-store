@@ -10,7 +10,7 @@ class WelcomeController extends Controller
 {
     public function show(Request $request)
     {
-        $products = Product::all();
-        return Inertia::render('Welcome', [ 'products' => $products ]);
+        $products_page = Product::with('productImagen')->with('category')->orderBy('id_product')->paginate(8);
+        return Inertia::render('Welcome', [ 'productsPage' => $products_page ]);
     }
 }

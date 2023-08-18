@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,3 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [WelcomeController::class, 'show']);
+
+Route::prefix('products')->group(function () {
+    Route::get('/{product_id}', [ProductController::class, 'getProduct'])->name('products.id');
+});

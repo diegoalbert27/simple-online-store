@@ -1,10 +1,14 @@
+import { Link } from "@inertiajs/inertia-react";
+
 export function Navbar() {
     return (
-        <nav className="navbar bg-body-tertiary navbar-expand-lg position-sticky top-0">
+        <nav className="navbar bg-body-tertiary navbar-expand-lg position-sticky top-0" style={{
+            zIndex: '1000'
+        }}>
             <div className="container">
-                <a className="navbar-brand" href="#">
+                <Link className="navbar-brand" href="/">
                     Simple Online Store
-                </a>
+                </Link>
 
                 <button
                     className="navbar-toggler"
