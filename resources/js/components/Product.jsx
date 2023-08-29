@@ -1,13 +1,10 @@
 import { Link } from "@inertiajs/inertia-react";
 import { useCart } from "../hook/useCart";
+import { ProductCount } from "./ProductCount";
+import { ProductManage } from "./ProductManage";
 
 export function Product({ product }) {
-    const { hasProduct, addProductCart, removeProductCart, findProduct, increaseAmount, decreaseAmount } = useCart()
-
-    const addProduct = () => addProductCart(product)
-    const removeProduct = () => removeProductCart(product)
-
-    const productCart = hasProduct(product) ? findProduct(product) : null
+    const { hasProduct } = useCart()
 
     return (
         <div
@@ -34,11 +31,7 @@ export function Product({ product }) {
 
                     {
                         hasProduct(product) &&
-                            <div className="d-flex gap-2 align-items-center my-2">
-                                <p className="my-auto flex-fill">Cantidad: <span className="fw-bold">{productCart?.count}</span></p>
-                                <button className="btn btn-sm btn-secondary px-3" onClick={() => decreaseAmount(product)}>-</button>
-                                <button className="btn btn-sm btn-secondary px-3" onClick={() => increaseAmount(product)}>+</button>
-                            </div>
+                            <ProductCount product={product} />
                     }
                 </div>
 
@@ -50,15 +43,7 @@ export function Product({ product }) {
                         Saber detalle
                     </Link>
 
-                    {
-                        hasProduct(product) ?
-                            <button className="btn btn-danger" onClick={removeProduct}>
-                                Sacar del carro
-                            </button> :
-                            <button className="btn btn-success" onClick={addProduct}>
-                                Agregar al carro
-                            </button>
-                    }
+                    <ProductManage product={product} />
                 </div>
             </div>
         </div>

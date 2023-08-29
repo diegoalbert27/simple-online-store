@@ -2,9 +2,11 @@ import { useState } from 'react'
 import { useCart } from "../../hook/useCart";
 
 import { Products } from '../../components/Products'
+import { ProductCount } from '../../components/ProductCount';
+import { ProductManage } from '../../components/ProductManage';
 
 export default function Details({ product, productsSimilars }) {
-    const { hasProduct, addProductCart, removeProductCart } = useCart()
+    const { hasProduct } = useCart()
 
     const [imagenPreview, setImagenPreview] = useState(product.product_imagen[0].url_imagen)
 
@@ -38,16 +40,13 @@ export default function Details({ product, productsSimilars }) {
                         <p>{product.category.name}</p>
                     </div>
 
+                    {
+                        hasProduct(product) &&
+                            <ProductCount product={product} />
+                    }
+
                     <div className="d-grid gap-2 py-2 w-100">
-                        {
-                            hasProduct(product) ?
-                                <button className="btn btn-danger" onClick={() => removeProductCart(product)}>
-                                    Sacar del carro
-                                </button> :
-                                <button className="btn btn-primary" onClick={() => addProductCart(product)}>
-                                    Agregar al carrito
-                                </button>
-                        }
+                        <ProductManage product={product} />
                     </div>
                 </div>
             </div>
