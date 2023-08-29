@@ -4,12 +4,20 @@ import { CartContext } from '../context/cart';
 export function useCart() {
     const { cart, setCart } = useContext(CartContext)
 
-    const addProductCart = (product) => (
+    const addProductCart = (product) => {
+        const productInCartIndex = findIndexProduct(product)
+
+        if (productInCartIndex >= 0) {
+            const newCart = structuredClone(cart)
+            newCart.products[productInCartIndex].count += 1
+            setCart(newCart)
+        }
+
         setCart((prevState) => ({
             ...prevState,
             products: [...prevState.products, {...product, count: 1}]
         }))
-    )
+    }
 
     const removeProductCart = (product) => {
         setCart((prevState) => ({
@@ -18,26 +26,13 @@ export function useCart() {
         }))
     }
 
-    const findProduct = (product) => (
-        cart.products.find(cartProduct => cartProduct.id_product === product.id_product)
-    )
-
     const findIndexProduct = (product) => (
         cart.products.findIndex(item => item.id_product === product.id_product)
     )
 
     const hasProduct = (product) => (
-        findProduct(product) !== undefined
+        cart.products.some(item => item.id_product === product.id_product)
     )
-
-    const increaseAmount = (product) => {
-        const productInCartIndex = findIndexProduct(product)
-        if (productInCartIndex >= 0) {
-            const newCart = structuredClone(cart)
-            newCart.products[productInCartIndex].count += 1
-            setCart(newCart)
-        }
-    }
 
     const decreaseAmount = (product) => {
         const productInCartIndex = findIndexProduct(product)
@@ -48,12 +43,16 @@ export function useCart() {
         }
     }
 
+    const cleanCart = () => setCart(prevState => ({
+        ...prevState,
+        products: []
+    }))
+
     return {
         addProductCart,
         removeProductCart,
+        cleanCart,
         hasProduct,
-        findProduct,
-        increaseAmount,
         decreaseAmount,
         cart
     }

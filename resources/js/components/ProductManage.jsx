@@ -1,25 +1,25 @@
 import { useCart } from "../hook/useCart";
 
 export function ProductManage({ product }) {
-    const { hasProduct, addProductCart, removeProductCart } = useCart()
+    const { hasProduct, addProductCart, removeProductCart } = useCart();
+
+    const isProductInToCart = hasProduct(product);
+    const typeButton = isProductInToCart ? 'danger' : 'success'
 
     return (
-        <>
-            {hasProduct(product) ? (
-                <button
-                    className="btn btn-danger"
-                    onClick={() => removeProductCart(product)}
-                >
-                    Sacar del carro
-                </button>
-            ) : (
-                <button
-                    className="btn btn-success"
-                    onClick={() => addProductCart(product)}
-                >
-                    Agregar al carro
-                </button>
-            )}
-        </>
+        <button
+            className={`btn btn-${typeButton}`}
+            onClick={
+                isProductInToCart ?
+                () => removeProductCart(product) :
+                () => addProductCart(product)
+            }
+        >
+            {
+                isProductInToCart ?
+                    'Sacar del carro' :
+                    'Agregar al carro'
+            }
+        </button>
     );
 }

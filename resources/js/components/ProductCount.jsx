@@ -1,9 +1,9 @@
 import { useCart } from "../hook/useCart";
 
 export function ProductCount({ product }) {
-    const { findProduct, decreaseAmount, increaseAmount } = useCart()
+    const { cart, decreaseAmount, addProductCart } = useCart()
 
-    const productCart = findProduct(product)
+    const productCart = cart.products.find(item => item.id_product === product.id_product)
     const count = productCart !== undefined ? productCart.count : 1
 
     return (
@@ -19,7 +19,7 @@ export function ProductCount({ product }) {
             </button>
             <button
                 className="btn btn-sm btn-secondary px-3"
-                onClick={() => increaseAmount(product)}
+                onClick={() => addProductCart(product)}
             >
                 +
             </button>
