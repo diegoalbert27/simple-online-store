@@ -1,20 +1,24 @@
 import { Head } from "@inertiajs/inertia-react";
 
-import { Navbar } from "../Layout/Navbar";
 import { Pagination } from "../components/Pagination";
-import { Footer } from "../Layout/Footer";
 import { Products } from "../components/Products";
+import { Header } from "../components/Header";
+import { useFilters } from "../hook/useFilters";
 
-export default function Welcome({ productsPage }) {
+import { useEffect } from 'react'
+
+export default function Welcome({ productsPage, categories }) {
+    const { filtersProducts, setCategories } = useFilters()
+    const filteredProducts = filtersProducts(productsPage.data)
+
+    useEffect(() => setCategories(categories))
+
     return (
         <>
-            <div
-                className="bg-secondary rounded"
-                style={{ height: "50vh" }}
-            ></div>
+            <Header />
 
             <div className="mt-4 mb-3">
-                <Products products={productsPage.data} />
+                <Products products={filteredProducts} />
 
                 <div className="d-flex justify-content-center">
                     <Pagination links={productsPage.links} />

@@ -4,6 +4,8 @@ import { createInertiaApp } from '@inertiajs/inertia-react'
 import { Layout } from './Layout/Layout'
 
 import * as bootstrap from 'bootstrap'
+import { FiltersProvider } from './context/filters'
+import { CartProvider } from "./context/cart";
 
 createInertiaApp({
     resolve: (name) => {
@@ -13,6 +15,12 @@ createInertiaApp({
         return page
     },
     setup({ el, App, props }) {
-        createRoot(el).render(<App {...props} />)
+        createRoot(el).render(
+            <FiltersProvider>
+                <CartProvider>
+                    <App {...props} />
+                </CartProvider>
+            </FiltersProvider>
+        )
     }
 })

@@ -1,7 +1,11 @@
 import { useState } from 'react'
+import { useCart } from "../../hook/useCart";
+
 import { Products } from '../../components/Products'
 
 export default function Details({ product, productsSimilars }) {
+    const { hasProduct, addProductCart, removeProductCart } = useCart()
+
     const [imagenPreview, setImagenPreview] = useState(product.product_imagen[0].url_imagen)
 
     const viewImagenPreview = (imagen) => setImagenPreview(imagen.url_imagen)
@@ -31,11 +35,19 @@ export default function Details({ product, productsSimilars }) {
                         <h1 className="text-uppercase">{product.name}</h1>
                         <p className="mb-0">{product.description}</p>
                         <h2 className="fw-light">${product.price}</h2>
-                        <p className="fw-semibold">Categoria: <span className="fw-normal">#{product.category.name}</span></p>
+                        <p>{product.category.name}</p>
                     </div>
 
                     <div className="d-grid gap-2 py-2 w-100">
-                        <button className="btn btn-primary" type="button">Agregar al carrito</button>
+                        {
+                            hasProduct(product) ?
+                                <button className="btn btn-danger" onClick={() => removeProductCart(product)}>
+                                    Sacar del carro
+                                </button> :
+                                <button className="btn btn-primary" onClick={() => addProductCart(product)}>
+                                    Agregar al carrito
+                                </button>
+                        }
                     </div>
                 </div>
             </div>
