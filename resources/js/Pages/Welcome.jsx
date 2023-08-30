@@ -5,13 +5,19 @@ import { Products } from "../components/Products";
 import { Header } from "../components/Header";
 import { useFilters } from "../hook/useFilters";
 
-import { useEffect } from 'react'
+import { useEffect, useContext } from 'react'
+import { ProductContext } from "../context/products";
 
 export default function Welcome({ productsPage, categories }) {
     const { filtersProducts, setCategories } = useFilters()
     const filteredProducts = filtersProducts(productsPage.data)
 
-    useEffect(() => setCategories(categories))
+    const { setProducts } = useContext(ProductContext)
+
+    useEffect(() => {
+        setCategories(categories)
+        setProducts(productsPage.data)
+    }, [])
 
     return (
         <>
