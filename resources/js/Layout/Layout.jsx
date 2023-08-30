@@ -18,7 +18,7 @@ export function Layout({ children }) {
             <div
                 className="modal fade"
                 id="signin"
-                tabindex="-1"
+                tabIndex="-1"
                 aria-hidden="true"
             >
                 <div className="modal-dialog">
@@ -40,7 +40,7 @@ export function Layout({ children }) {
                             <form>
                                 <div className="mb-3">
                                     <label
-                                        for="email"
+                                        htmlFor="email"
                                         className="col-form-label"
                                     >
                                         Correo Electronico:
@@ -53,7 +53,7 @@ export function Layout({ children }) {
                                 </div>
                                 <div className="mb-3">
                                     <label
-                                        for="password"
+                                        htmlFor="password"
                                         className="col-form-label"
                                     >
                                         Contraseña:
@@ -74,7 +74,9 @@ export function Layout({ children }) {
 
                             <div className="text-center">
                                 <p className="mb-0">¿No tienes una cuanta aún?</p>
-                                <Link href="/signup">Crear una ahora!</Link>
+                                <button className="btn btn-link" type="button" data-bs-dismiss="modal" onClick={() => {
+                                    window.document.location = '/signup'
+                                }}>Crear una ahora!</button>
                             </div>
                         </div>
                     </div>
