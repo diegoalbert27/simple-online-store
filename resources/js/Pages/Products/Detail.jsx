@@ -1,3 +1,4 @@
+import { Link } from "@inertiajs/inertia-react";
 import { useState } from 'react'
 import { useCart } from "../../hook/useCart";
 
@@ -54,11 +55,15 @@ export default function Details({ product, productsSimilars }) {
             {
                 productsSimilars.length > 0 && (
                     <div className='my-5'>
-                        <h2 className='fw-light mb-3'>Productos Similares</h2>
+                        <h2 className='fw-light'>Productos Similares</h2>
                         <Products products={productsSimilars} />
                     </div>
                 )
             }
+
+            <div className="text-center mb-3">
+                <Link href="/">Ver mas productos</Link>
+            </div>
         </>
     )
 }

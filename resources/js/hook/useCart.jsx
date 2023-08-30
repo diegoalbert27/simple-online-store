@@ -11,6 +11,7 @@ export function useCart() {
             const newCart = structuredClone(cart)
             newCart.products[productInCartIndex].count += 1
             setCart(newCart)
+            return newCart
         }
 
         setCart((prevState) => ({
