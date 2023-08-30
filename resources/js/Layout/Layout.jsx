@@ -3,12 +3,15 @@ import { Navbar } from "./Navbar";
 
 export function Layout({ children }) {
     return (
-        <>
+        <div style={{
+            position: 'relative',
+            minHeight: '100vh'
+        }}>
             <Navbar />
-            <div className="container mt-4">
+            <div className="container mt-4 pb-5">
                 { children }
             </div>
             <Footer />
-        </>
+        </div>
     );
 }

@@ -43,12 +43,7 @@ export function Navbar() {
                         </li>
                         <li className="nav-item">
                             <a className="nav-link" href="#">
-                                Iniciar sesión
-                            </a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="#">
-                                Registrarse
+                                Ingresar
                             </a>
                         </li>
                     </ul>
