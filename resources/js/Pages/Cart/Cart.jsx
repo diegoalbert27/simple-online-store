@@ -48,6 +48,7 @@ export default function Cart() {
                                 className="form-control text-center w-25"
                                 type="text"
                                 value={product.count}
+                                readOnly
                             />
                             <button className="btn border px-3" onClick={() => addProductCart(product)}>+</button>
                         </div>
