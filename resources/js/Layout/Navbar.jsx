@@ -8,9 +8,12 @@ export function Navbar() {
     const { products } = useContext(ProductContext)
 
     const [productsFinded, setProductsFinded] = useState([])
+    const [showSearch, setShowSearch] = useState(false)
 
     const searchProduct = (event) => {
         event.preventDefault()
+
+        setShowSearch(true)
 
         const keywordsFindProducts = inputSearch.current.value
 
@@ -30,6 +33,8 @@ export function Navbar() {
 
         setProductsFinded(productsFinded)
     }
+
+    const showFindedProduct = productsFinded.length > 0 ? '' : 'd-none'
 
     return (
         <nav className="navbar bg-body-tertiary navbar-expand-lg position-sticky top-0" style={{
@@ -61,12 +66,13 @@ export function Navbar() {
                         ref={inputSearch}
                         onChange={searchProduct}
                         onFocus={searchProduct}
+                        onBlur={() => setShowSearch(false)}
                     />
 
                     {
-                        productsFinded.length > 0 &&
-                            <div className="position-absolute top-100 bg-white p-2 rounded" style={{
-                                width: '16.5%'
+                        showSearch &&
+                            <div className={`position-absolute top-100 bg-white p-2 rounded ${showFindedProduct}`} style={{
+                            width: '16.5%'
                             }}>
                                 {
                                     productsFinded.map(product => (
