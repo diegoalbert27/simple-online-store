@@ -115,8 +115,6 @@ export function Navbar() {
                                                 <h2 className="fs-6 mb-0">{user.name}</h2>
                                                 <div className="mb-2 text-secondary" style={{
                                                     fontSize: '.8rem',
-                                                    width: '8rem',
-                                                    wordWrap: 'break-word'
                                                 }}>{user.email}</div>
                                             </div>
                                         </li>
