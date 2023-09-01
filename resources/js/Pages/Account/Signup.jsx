@@ -1,16 +1,21 @@
 import SignupImage from "../../../images/curiosity-pana.png";
 
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { object, string, ref } from "yup";
+import { object, string, ref, boolean } from "yup";
+
+import { post } from "../../services/services";
+import Storage from "../../services/storage";
+import toast, { Toaster } from 'react-hot-toast';
 
 const userSchema = object({
     name: string().required('El nombre es requerido'),
     lastName: string().required('El apellido es requerido'),
-    email: string().required('El correo electronico es requrido').email(),
-    phone: string().required('El telefono es requerido').length(12),
-    address: string().required('La direccion es requerido').length(24),
+    email: string().required('El correo electronico es requrido').email('debe ingresar un correo electronico valido'),
+    phone: string().required('El telefono es requerido').min(11, 'Debes escribir un numero mayo que 11'),
+    address: string().required('La direccion es requerido'),
     password: string().required('La contraseña es requerida'),
-    repeatPassword: string().required('Repetir contraseña es requerida').oneOf([ref('password'), null], 'La contraseña no coincide')
+    repeatPassword: string().required('Repetir contraseña es requerida').oneOf([ref('password'), null], 'La contraseña no coincide'),
+    accept: boolean()
 });
 
 export default function Signup() {
@@ -20,10 +25,32 @@ export default function Signup() {
         }
     }
 
+    const sendUser = async (user, setFieldError) => {
+        const response = await post('/user', {
+            ...user,
+            phone: Number(user.phone)
+        })
+
+        if (response.status) {
+            Storage.set('user', response.data.data.user)
+            Storage.set('token', response.data.data.token)
+
+            return true
+        }
+
+        for(const [key, values] of Object.entries(response.response.data.errors)) {
+            setFieldError(key, values.join('\n'))
+        }
+
+        toast.error(response.response.data.message);
+
+        return false
+    }
+
     return (
         <div className="row">
             <div className="col-6">
-                <h2>Crearme una cuenta</h2>
+                <h2>Crear una cuenta</h2>
 
                 <Formik
                     initialValues={{
@@ -33,14 +60,21 @@ export default function Signup() {
                         phone: "",
                         address: "",
                         password: "",
-                        repeatPassword: ""
+                        repeatPassword: "",
+                        accept: true
                     }}
                     validationSchema={userSchema}
-                    onSubmit={(values, { setSubmitting }) => {
-                        setTimeout(() => {
-                            alert(JSON.stringify(values, null, 2));
-                            setSubmitting(false);
-                        }, 400);
+                    onSubmit={async (values, { setSubmitting, resetForm, setFieldError  }) => {
+                        const isRegister = await sendUser(values, setFieldError)
+
+                        if (isRegister) {
+                            toast.success('Cuenta creada satisfactoriamente');
+                            resetForm()
+
+                            setTimeout(() => window.location.href = '/', 2000)
+                        }
+
+                        setSubmitting(false);
                     }}
                 >
                     {({ errors, touched, isSubmitting }) => (
@@ -144,7 +178,7 @@ export default function Signup() {
 
                             <div className="d-grid gap-2 mt-2 mb-4">
                                 <div className="text-center">
-                                    <Field type="checkbox" /> Aceptos todos los
+                                    <Field type="checkbox" name="accept" /> Aceptos todos los
                                     terminos y condiciones.
                                 </div>
                                 <button
@@ -162,6 +196,11 @@ export default function Signup() {
             <div className="col-6 my-auto">
                 <img src={SignupImage} height={500} width="100%" />
             </div>
+
+            <Toaster
+                position="bottom-center"
+                reverseOrder={false}
+            />
         </div>
     );
 }

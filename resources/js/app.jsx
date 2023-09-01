@@ -7,15 +7,18 @@ import * as bootstrap from 'bootstrap'
 import { FiltersProvider } from './context/filters'
 import { CartProvider } from "./context/cart";
 import { ProductProvider } from './context/products'
+import { AuthProvider } from './context/auth'
 
 createInertiaApp({
     resolve: (name) => {
         const pages = import.meta.glob('./Pages/**/*.jsx', { eager: true })
         const page = pages[`./Pages/${name}.jsx`]
         page.default.layout = page.default.layout || (page => (
-            <ProductProvider>
-                <Layout children={page} />
-            </ProductProvider>
+            <AuthProvider>
+                <ProductProvider>
+                    <Layout children={page} />
+                </ProductProvider>
+            </AuthProvider>
         ))
         return page
     },

@@ -1,11 +1,16 @@
 import { Link } from "@inertiajs/inertia-react";
 import { useRef, useContext, useState } from 'react'
 import { ProductContext } from "../context/products";
+import { useAuth } from "../hook/useAuth";
+
+import { CiUser, CiPower } from "react-icons/ci";
 
 export function Navbar() {
     const inputSearch = useRef()
 
     const { products } = useContext(ProductContext)
+
+    const { isAuth, user, logout } = useAuth()
 
     const [productsFinded, setProductsFinded] = useState([])
     const [showSearch, setShowSearch] = useState(false)
@@ -96,9 +101,40 @@ export function Navbar() {
                                 Carrito
                             </Link>
                         </li>
-                        <li className="nav-item">
-                            <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#signin">Ingresar</button>
-                        </li>
+
+                        {
+                            isAuth() ?
+                            <li className="nav-item my-auto">
+                                <div className="dropstart">
+                                    <button className="rounded-circle bg-black border-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <CiUser className="fs-4 mx-0 m-1 text-white" />
+                                    </button>
+                                    <ul className="dropdown-menu me-2">
+                                        <li>
+                                            <div className="border-bottom mx-3 mt-1">
+                                                <h2 className="fs-6 mb-0">{user.name}</h2>
+                                                <div className="mb-2 text-secondary" style={{
+                                                    fontSize: '.8rem',
+                                                    width: '8rem',
+                                                    wordWrap: 'break-word'
+                                                }}>{user.email}</div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <button className="btn fw-semibold mx-3 p-0 d-flex gap-1 mt-1 align-items-center" style={{
+                                                fontSize: '.93rem'
+                                            }}  type="button" onClick={() => logout('hello')}>
+                                                <CiPower className="fs-5" />
+                                                <span>Cerrar Sesión</span>
+                                            </button>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li> :
+                            <li className="nav-item">
+                                <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#signin">Ingresar</button>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>
