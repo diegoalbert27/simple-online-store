@@ -3,6 +3,9 @@ import { Link } from "@inertiajs/inertia-react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { object, string } from "yup";
 import { useId } from 'react'
+import { login } from "../services/account";
+
+import { useState } from 'react'
 
 const userSchema = object({
     email: string().required('El correo electronico es requrido').email(),
@@ -13,9 +16,33 @@ export function Signin() {
     const email = useId()
     const password = useId()
 
+    const [alertMessage, setAlertMessage] = useState('')
+    const [typeAlert, setTypeAlert] = useState('')
+
     const checkInput = (errors, touched, name) => {
         if (touched[name] === true) {
             return (errors[name] === undefined ? '' : 'border border-danger')
+        }
+    }
+
+    const sendAccess = async (access, setFieldError)  => {
+        try {
+            const response = await login(access)
+            setTypeAlert('success')
+            setAlertMessage(response.data.message)
+
+            return true
+        } catch(err) {
+            if (err.response.data.errors !== undefined) {
+                for (const [key, values] of Object.entries(err.response.data.errors)) {
+                    setFieldError(key, values.join('\n'))
+                }
+            }
+
+            setTypeAlert('danger')
+            setAlertMessage(err.response.data.message)
+
+            return false
         }
     }
 
@@ -42,17 +69,27 @@ export function Signin() {
                             Iniciar Sesión
                         </h2>
 
+                        {
+                            alertMessage !== '' &&
+                                <div className={`alert alert-${typeAlert} text-center mt-2 mb-0`}>
+                                    {alertMessage}
+                                </div>
+                        }
+
                         <Formik
                             initialValues={{
                                 email: '',
                                 password: ''
                             }}
                             validationSchema={userSchema}
-                            onSubmit={(values, { setSubmitting }) => {
-                                setTimeout(() => {
-                                    alert(JSON.stringify(values, null, 2));
-                                    setSubmitting(false);
-                                }, 400);
+                            onSubmit={async (values, { setSubmitting, setFieldError, resetForm }) => {
+                                const isLogged = await sendAccess(values, setFieldError)
+                                if (isLogged) {
+                                    resetForm()
+                                    setTimeout(() => window.location.href = '/', 1000)
+                                }
+
+                                setSubmitting(false);
                             }}
                         >
                             {({ errors, touched, isSubmitting }) => (
@@ -80,7 +117,7 @@ export function Signin() {
                                             Contraseña
                                         </label>
                                         <Field
-                                            type={password}
+                                            type='password'
                                             className={`form-control ${checkInput(errors, touched, 'password')}`}
                                             name="password"
                                             id={password}

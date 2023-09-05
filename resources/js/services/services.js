@@ -3,12 +3,12 @@ import axios from "axios";
 const base_url = '/api'
 const config = {}
 
-async function get(endpoint) {
+async function get(endpoint, config = {}) {
     try {
         const response = await axios.get(`${base_url}${endpoint}`, config)
         return response
     } catch(err) {
-        return err
+        throw(err)
     }
 }
 
@@ -17,7 +17,7 @@ async function post(endpoint, data) {
         const response = await axios.post(`${base_url}${endpoint}`, data, config)
         return response
     } catch(err) {
-        return err
+        throw(err)
     }
 }
 
@@ -26,7 +26,7 @@ async function put(endpoint, data) {
         const response = await axios.put(`${base_url}${endpoint}`, data, config)
         return response
     } catch(err) {
-        return err
+        throw(err)
     }
 }
 
@@ -35,7 +35,7 @@ async function remove(endpoint) {
         const response = await axios.delete(`${base_url}${endpoint}`, config)
         return response
     } catch(err) {
-        return err
+        throw(err)
     }
 }
 

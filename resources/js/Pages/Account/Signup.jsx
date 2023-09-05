@@ -3,16 +3,13 @@ import SignupImage from "../../../images/curiosity-pana.png";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { object, string, ref, boolean } from "yup";
 
-import { post } from "../../services/services";
-import Storage from "../../services/storage";
 import toast, { Toaster } from 'react-hot-toast';
+import { createUser } from "../../services/account";
 
 const userSchema = object({
     name: string().required('El nombre es requerido'),
     lastName: string().required('El apellido es requerido'),
     email: string().required('El correo electronico es requrido').email('debe ingresar un correo electronico valido'),
-    phone: string().required('El telefono es requerido').min(11, 'Debes escribir un numero mayo que 11'),
-    address: string().required('La direccion es requerido'),
     password: string().required('La contraseña es requerida'),
     repeatPassword: string().required('Repetir contraseña es requerida').oneOf([ref('password'), null], 'La contraseña no coincide'),
     accept: boolean()
@@ -26,25 +23,21 @@ export default function Signup() {
     }
 
     const sendUser = async (user, setFieldError) => {
-        const response = await post('/user', {
-            ...user,
-            phone: Number(user.phone)
-        })
-
-        if (response.status) {
-            Storage.set('user', response.data.data.user)
-            Storage.set('token', response.data.data.token)
+        try {
+            await createUser({
+                ...user
+            })
 
             return true
+        } catch(err) {
+            for (const [key, values] of Object.entries(err.response.data.errors)) {
+                setFieldError(key, values.join('\n'))
+            }
+
+            toast.error(err.response.data.message);
+
+            return false
         }
-
-        for(const [key, values] of Object.entries(response.response.data.errors)) {
-            setFieldError(key, values.join('\n'))
-        }
-
-        toast.error(response.response.data.message);
-
-        return false
     }
 
     return (
@@ -57,8 +50,6 @@ export default function Signup() {
                         name: "",
                         lastName: "",
                         email: "",
-                        phone: "",
-                        address: "",
                         password: "",
                         repeatPassword: "",
                         accept: true
@@ -79,7 +70,7 @@ export default function Signup() {
                 >
                     {({ errors, touched, isSubmitting }) => (
                         <Form>
-                            <div className="bg-light p-4 rounded mb-2">
+                            <div className="bg-light p-4 rounded mb-3">
                                 <h3 className="fs-5">Informacion Personal</h3>
                                 <div className="row">
                                     <div className="col">
@@ -107,8 +98,8 @@ export default function Signup() {
                                 </div>
                             </div>
 
-                            <div className="bg-light p-4 rounded mb-2">
-                                <h3 className="fs-5">Contacto</h3>
+                            <div className="bg-light p-4 rounded">
+                                <h3 className="fs-5">Crear Cuenta</h3>
                                 <div className="row mb-2">
                                     <div className="col">
                                         <label htmlFor="email">
@@ -119,35 +110,13 @@ export default function Signup() {
                                             type="email"
                                             id="email"
                                             name="email"
+                                            autoComplete="username"
                                         />
                                         <ErrorMessage className="text-danger" name="email" component="div" />
                                     </div>
-                                    <div className="col">
-                                        <label htmlFor="phone">Telefono</label>
-                                        <Field
-                                            className={`form-control ${checkInput(errors, touched, 'phone')}`}
-                                            type="text"
-                                            id="phone"
-                                            name="phone"
-                                        />
-                                        <ErrorMessage className="text-danger" name="phone" component="div" />
-                                    </div>
                                 </div>
-                                <label htmlFor="address">Direccion</label>
-                                <Field
-                                    className={`form-control ${checkInput(errors, touched, 'address')}`}
-                                    type="text"
-                                    id="address"
-                                    name="address"
-                                    autoComplete="username"
-                                />
-                                <ErrorMessage className="text-danger" name="address" component="div" />
-                            </div>
-
-                            <div className="bg-light p-4 rounded">
-                                <h3 className="fs-5">Crear Cuenta</h3>
                                 <div className="row">
-                                    <div className="col">
+                                    <div className="col-6">
                                         <label htmlFor="password">
                                             Contraseña
                                         </label>
@@ -160,7 +129,7 @@ export default function Signup() {
                                         />
                                         <ErrorMessage className="text-danger" name="password" component="div" />
                                     </div>
-                                    <div className="col">
+                                    <div className="col-6">
                                         <label htmlFor="repeat-password">
                                             Repetir Contraseña
                                         </label>

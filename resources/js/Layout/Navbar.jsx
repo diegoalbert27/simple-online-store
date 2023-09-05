@@ -121,7 +121,7 @@ export function Navbar() {
                                         <li>
                                             <button className="btn fw-semibold mx-3 p-0 d-flex gap-1 mt-1 align-items-center" style={{
                                                 fontSize: '.93rem'
-                                            }}  type="button" onClick={() => logout('hello')}>
+                                            }}  type="button" onClick={async () => await logout()}>
                                                 <CiPower className="fs-5" />
                                                 <span>Cerrar Sesión</span>
                                             </button>

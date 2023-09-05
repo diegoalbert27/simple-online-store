@@ -1,5 +1,6 @@
 import { createContext, useState, useEffect } from 'react'
 import Storage from '../services/storage'
+import { logoutUser } from '../services/account'
 
 export const AuthContext = createContext()
 
@@ -12,12 +13,17 @@ export function AuthProvider({ children }) {
         setUser(Storage.get('user'))
     }, [])
 
-    const logout = () => {
-        Storage.remove('token')
-        Storage.remove('user')
+    const logout = async () => {
+        try {
+            const response = await logoutUser()
 
-        setToken(null)
-        setUser(null)
+            setToken(null)
+            setUser(null)
+
+            return response
+        } catch(err) {
+            throw(err)
+        }
     }
 
     return (
