@@ -1,13 +1,11 @@
 import { Link } from "@inertiajs/inertia-react";
-import { useRef, useContext, useState } from 'react'
+import { useContext, useState } from 'react'
 import { ProductContext } from "../context/products";
 import { useAuth } from "../hook/useAuth";
 
 import { CiUser, CiPower } from "react-icons/ci";
 
 export function Navbar() {
-    const inputSearch = useRef()
-
     const { products } = useContext(ProductContext)
 
     const { isAuth, user, logout } = useAuth()
@@ -16,11 +14,9 @@ export function Navbar() {
     const [showSearch, setShowSearch] = useState(false)
 
     const searchProduct = (event) => {
-        event.preventDefault()
-
         setShowSearch(true)
 
-        const keywordsFindProducts = inputSearch.current.value
+        const keywordsFindProducts = event.target.value
 
         if (keywordsFindProducts === '') {
             return setProductsFinded([])
@@ -62,29 +58,29 @@ export function Navbar() {
                     <span className="navbar-toggler-icon"></span>
                 </button>
 
-                <form className="d-flex" role="search" onSubmit={searchProduct}>
+                <form className="d-flex" role="search">
                     <input
                         className="form-control me-2"
                         type="search"
                         placeholder="Buscar"
                         aria-label="Buscar"
-                        ref={inputSearch}
                         onChange={searchProduct}
                         onFocus={searchProduct}
-                        onBlur={() => setShowSearch(false)}
                     />
 
                     {
                         showSearch &&
-                            <div className={`position-absolute top-100 bg-white p-2 rounded ${showFindedProduct}`} style={{
-                            width: '16.5%'
-                            }}>
+                            <div className={`position-absolute top-100 bg-white p-2 rounded ${showFindedProduct}`}
+                                style={{
+                                    width: '16.5%'
+                                }}
+                            >
                                 {
                                     productsFinded.map(product => (
                                         <div className="d-flex gap-2 border-bottom mb-1 pb-1" key={product.id_product}>
                                             <img className="rounded" src={product.product_imagen[0].url_imagen} height={50} width={50} />
                                             <div className="d-flex flex-column">
-                                                <Link className="text-capitalize" href={`/products/${product.id_product}`}>{product.name}</Link>
+                                                <Link className="text-capitalize" href={`/products/${product.id_product}`} onClick={() => setShowSearch(false)}>{product.name}</Link>
                                                 <p className="mb-0">{product.description.slice(0, 13)}...</p>
                                             </div>
                                         </div>
