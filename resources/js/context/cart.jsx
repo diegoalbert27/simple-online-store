@@ -1,4 +1,5 @@
-import { createContext, useState } from 'react'
+import { createContext, useState, useEffect } from 'react'
+import Storage from '../services/storage'
 
 export const CartContext = createContext()
 

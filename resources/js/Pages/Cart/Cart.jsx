@@ -1,24 +1,52 @@
 import { Link } from "@inertiajs/inertia-react";
 import { useCart } from "../../hook/useCart";
 
+import { CiTrash, CiCircleCheck } from "react-icons/ci";
+import toast, { Toaster } from "react-hot-toast";
+
 export default function Cart() {
-    const { cart, addProductCart, decreaseAmount, removeProductCart } = useCart();
+    const { cart, addProductCart, decreaseAmount, removeProductCart, cleanCart } = useCart();
 
     const total = cart.products
         .map(product => product.count * product.price)
         .reduce((total, item) => total + item, 0)
+
+    const cleanAllCart = () => {
+        const isConfirmed = window.confirm('Desea eliminar por completo el carro?')
+
+        if (isConfirmed) {
+            cleanCart()
+            toast.success('Eliminado con exito')
+        }
+    }
 
     return (
         <div className="border p-5 rounded mb-4">
             <div className="mb-2">
                 <Link href="/">Continuar Comprando</Link>
             </div>
-            <div>
-                <h2>Carrito de compras</h2>
-                <p className="mb-1">
-                    Tienes <span>{cart.products.length}</span> productos en tu carro
-                </p>
-                <p className="fs-4">Total: ${total.toFixed(2)}</p>
+            <div className="d-flex justify-content-between">
+                <div>
+                    <h2>Carrito de compras</h2>
+                    <p className="mb-1">
+                        Tienes <span>{cart.products.length}</span> productos en tu carro
+                    </p>
+                    <p className="fs-4">Total: ${total.toFixed(2)}</p>
+                </div>
+                <div>
+                    {
+                        total > 0 && (
+                            <>
+                                <button className="border-0 bg-white me-2" onClick={cleanAllCart}>
+                                    <CiTrash className="fs-3" />
+                                </button>
+                                <button className="btn btn-primary">
+                                    <CiCircleCheck className="fs-3" /> Finalizar Compra
+                                </button>
+                            </>
+                        )
+                    }
+                </div>
             </div>
             <div className="mt-3">
                 {cart.products.map((product) => (
@@ -59,6 +87,10 @@ export default function Cart() {
                     </div>
                 ))}
             </div>
+            <Toaster
+                position="bottom-right"
+                reverseOrder={false}
+            />
         </div>
     );
 }
