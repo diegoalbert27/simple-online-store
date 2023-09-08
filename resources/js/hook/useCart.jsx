@@ -15,7 +15,7 @@ export function useCart() {
         if (newCart !== null) {
             setCart(newCart)
         }
-    })
+    }, [])
 
     const addProductCart = (product) => {
         const productInCartIndex = findIndexProduct(product)

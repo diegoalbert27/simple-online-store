@@ -3,12 +3,12 @@ import { useContext, useState } from 'react'
 import { ProductContext } from "../context/products";
 import { useAuth } from "../hook/useAuth";
 
-import { CiUser, CiPower } from "react-icons/ci";
+import { CiUser, CiPower, CiShoppingBasket } from "react-icons/ci";
 
 export function Navbar() {
     const { products } = useContext(ProductContext)
 
-    const { isAuth, user, logout } = useAuth()
+    const { isAuth, user, logout, token } = useAuth()
 
     const [productsFinded, setProductsFinded] = useState([])
     const [showSearch, setShowSearch] = useState(false)
@@ -107,11 +107,18 @@ export function Navbar() {
                                     </button>
                                     <ul className="dropdown-menu me-2">
                                         <li>
-                                            <div className="border-bottom mx-3 mt-1">
+                                            <div className="border-bottom mx-3 mt-1 mb-1 pb-1">
                                                 <h2 className="fs-6 mb-0">{user.name}</h2>
-                                                <div className="mb-2 text-secondary" style={{
+                                                <div className="text-secondary" style={{
                                                     fontSize: '.8rem',
                                                 }}>{user.email}</div>
+
+                                                <Link className="btn fw-semibold p-0 d-flex gap-1 mt-1 align-items-center" headers={{ 'Authorization': `Bearer ${token}` }} style={{
+                                                    fontSize: '.93rem'
+                                                }} href="/orders">
+                                                    <CiShoppingBasket className="fs-5" />
+                                                    <span>Ordenes</span>
+                                                </Link>
                                             </div>
                                         </li>
                                         <li>

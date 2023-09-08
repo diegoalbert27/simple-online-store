@@ -2,7 +2,6 @@ import { get, post } from "./services"
 import Storage from "./storage"
 
 const accountUrl = '/user'
-const token = Storage.get('token')
 
 export async function createUser(newUser) {
     try {
@@ -32,13 +31,7 @@ export async function login(access) {
 
 export async function logoutUser() {
     try {
-        const config = {
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        }
-
-        const response = await get(`${accountUrl}/logout`, config)
+        const response = await get(`${accountUrl}/logout`, true)
 
         Storage.remove('user')
         Storage.remove('token')

@@ -20,11 +20,6 @@ class Product extends Model
         return $this->hasMany(ProductImagen::class, 'id_product');
     }
 
-    // public function category() : HasOne
-    // {
-    //     return $this->hasOne(Category::class, 'id_category');
-    // }
-
     public function category() : BelongsTo
     {
         return $this->belongsTo(Category::class, 'id_category');

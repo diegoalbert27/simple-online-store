@@ -3,6 +3,7 @@ import { useCart } from "../../hook/useCart";
 
 import { CiTrash, CiCircleCheck } from "react-icons/ci";
 import toast, { Toaster } from "react-hot-toast";
+import { createCart } from "../../services/cart";
 
 export default function Cart() {
     const { cart, addProductCart, decreaseAmount, removeProductCart, cleanCart } = useCart();
@@ -17,6 +18,16 @@ export default function Cart() {
         if (isConfirmed) {
             cleanCart()
             toast.success('Eliminado con exito')
+        }
+    }
+
+    const sendShop = async () => {
+        try {
+            const response = await createCart(cart)
+            toast.success(response.data.message)
+            cleanCart()
+        } catch(err) {
+            toast.error(err.response.data.message)
         }
     }
 
@@ -40,7 +51,7 @@ export default function Cart() {
                                 <button className="border-0 bg-white me-2" onClick={cleanAllCart}>
                                     <CiTrash className="fs-3" />
                                 </button>
-                                <button className="btn btn-primary">
+                                <button className="btn btn-primary" onClick={sendShop}>
                                     <CiCircleCheck className="fs-3" /> Finalizar Compra
                                 </button>
                             </>
