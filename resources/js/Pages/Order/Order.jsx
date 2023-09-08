@@ -19,7 +19,7 @@ export default function Order({ carts }) {
     }
 
     return (
-        <div className="border rounded p-5">
+        <div className="border rounded p-5 mb-4">
             <h1 className="fw-normal mb-0">Lista de compras</h1>
             <p className="mb-4 fw-semibold text-secondary">Total de {carts.length} compras</p>
 
