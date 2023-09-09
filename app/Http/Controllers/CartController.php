@@ -64,4 +64,15 @@ class CartController extends Controller
         $carts = Cart::where('id_user', '=', $current_user->id_user)->with('cartProduct')->get();
         return Inertia::render('Order/Order', [ 'carts' => $carts ]);
     }
+
+    public function getOrderById($id_cart, Request $request)
+    {
+        $current_user = $request->user();
+        $cart = Cart::where('id_user', '=', $current_user->id_user)
+            ->where('id_cart', '=', $id_cart)
+            ->with('cartProduct')
+            ->first();
+
+        return Inertia::render('Order/Cart', [ 'cart' => $cart ]);
+    }
 }

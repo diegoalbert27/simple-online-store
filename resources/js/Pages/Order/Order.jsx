@@ -1,6 +1,10 @@
 import { CiCircleChevRight } from "react-icons/ci";
+import { Link } from "@inertiajs/inertia-react";
+import { useAuth } from "../../hook/useAuth";
 
 export default function Order({ carts }) {
+    const { token } = useAuth()
+
     const getTotalPriceCart = (cartProducts) => {
         let totalPriceCart = 0
         cartProducts.forEach(cartProduct => totalPriceCart += cartProduct.price_product)
@@ -18,6 +22,19 @@ export default function Order({ carts }) {
         return STATUS_COLOR[status]
     }
 
+    const getFormatDate = (formatDate) => {
+        const date = new Date(formatDate)
+        const year = date.getFullYear()
+        const month = date.getMonth() + 1
+        const day = date.getDay()
+
+        const addZeroDate = (date) => (
+            date <= 10 ? `0${date}` : date
+        )
+
+        return `${addZeroDate(day)}-${addZeroDate(month)}-${year}`
+    }
+
     return (
         <div className="border rounded p-5 mb-4">
             <h1 className="fw-normal mb-0">Lista de compras</h1>
@@ -29,7 +46,15 @@ export default function Order({ carts }) {
                         <div className="position-relative" style={{
                             width: '9.9em'
                         }}>
-                            <img className="position-absolute rounded" src={cart.cart_product[0].product.product_imagen[0].url_imagen} width='100%' />
+                            {
+                                cart.cart_product.map((cartProduct, index) => {
+                                    if (index <= 2) {
+                                        return (
+                                            <img className="position-absolute rounded" src={cartProduct.product.product_imagen[0].url_imagen} width={`${100 - (index * 5)}%`} />
+                                        )
+                                    }
+                                })
+                            }
                         </div>
                         <div className="flex-fill">
                             <h2 className="fw-bold mb-0">000{cart.id_cart}</h2>
@@ -40,14 +65,14 @@ export default function Order({ carts }) {
                             <div className="mt-2 mb-2">
                                 <p className="mb-0 text-secondary fw-light" style={{
                                     fontSize: '.9rem'
-                                }}>{cart.created_at}</p>
+                                }}>{getFormatDate(cart.created_at)}</p>
                                 <span className="">Total: ${getTotalPriceCart(cart.cart_product)}</span>
                             </div>
                         </div>
                         <div className="m-auto pe-5">
-                            <button className="btn" type="button">
+                            <Link className="btn" href={`/orders/${cart.id_cart}`} headers={{ 'Authorization': `Bearer ${token}` }} >
                                 <CiCircleChevRight className="fs-2" />
-                            </button>
+                            </Link>
                         </div>
                     </div>
                 ))

@@ -29,4 +29,5 @@ Route::prefix('products')->group(function () {
 
 Route::middleware('auth:sanctum')->prefix('orders')->group(function () {
     Route::get('/', [CartController::class, 'orders']);
+    Route::get('/{id_cart}', [CartController::class, 'getOrderById']);
 });
