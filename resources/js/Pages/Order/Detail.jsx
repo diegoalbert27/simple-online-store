@@ -1,4 +1,4 @@
-export default function Cart(cart) {
+export default function Detail(cart) {
     return (
         <div>
             {JSON.stringify(cart)}

@@ -73,6 +73,6 @@ class CartController extends Controller
             ->with('cartProduct')
             ->first();
 
-        return Inertia::render('Order/Cart', [ 'cart' => $cart ]);
+        return Inertia::render('Order/Detail', [ 'cart' => $cart ]);
     }
 }
