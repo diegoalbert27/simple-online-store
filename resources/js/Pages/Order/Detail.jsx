@@ -23,7 +23,7 @@ export default function Detail({ cart }) {
 
                         <div className="col-6 ps-3 m-auto">
                             <h2 className="mb-1">
-                                <Link href={`/products/${cartProduct.id_product}`}>{cartProduct.product.name}</Link>
+                                <Link href={`/products/${cartProduct.product.id_product}`}>{cartProduct.product.name}</Link>
                             </h2>
                             <p>{cartProduct.product.category.name}</p>
                         </div>
