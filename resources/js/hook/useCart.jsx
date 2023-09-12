@@ -17,6 +17,16 @@ export function useCart() {
         }
     }, [])
 
+    const getTotalPriceCart = (products) => {
+        let totalPriceCart = 0
+        products.forEach(product => {
+            const PRICE = product.price_product === undefined ? 'price' : 'price_product'
+            return totalPriceCart += product[PRICE]
+        })
+
+        return totalPriceCart.toFixed(2)
+    }
+
     const addProductCart = (product) => {
         const productInCartIndex = findIndexProduct(product)
 
@@ -93,6 +103,7 @@ export function useCart() {
         cleanCart,
         hasProduct,
         decreaseAmount,
-        cart
+        cart,
+        getTotalPriceCart
     }
 }

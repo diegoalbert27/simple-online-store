@@ -15,6 +15,8 @@ class CartProduct extends Model
 
     public function product() : HasOne
     {
-        return $this->hasOne(Product::class, 'id_product')->with('productImagen');
+        return $this->hasOne(Product::class, 'id_product')
+            ->with('category')
+            ->with('productImagen');
     }
 }

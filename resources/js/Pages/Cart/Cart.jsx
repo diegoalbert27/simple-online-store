@@ -6,11 +6,9 @@ import toast, { Toaster } from "react-hot-toast";
 import { createCart } from "../../services/cart";
 
 export default function Cart() {
-    const { cart, addProductCart, decreaseAmount, removeProductCart, cleanCart } = useCart();
+    const { cart, addProductCart, decreaseAmount, removeProductCart, cleanCart, getTotalPriceCart } = useCart();
 
-    const total = cart.products
-        .map(product => product.count * product.price)
-        .reduce((total, item) => total + item, 0)
+    const total = getTotalPriceCart(cart.products)
 
     const cleanAllCart = () => {
         const isConfirmed = window.confirm('Desea eliminar por completo el carro?')
@@ -42,7 +40,7 @@ export default function Cart() {
                     <p className="mb-1">
                         Tienes <span>{cart.products.length}</span> productos en tu carro
                     </p>
-                    <p className="fs-4">Total: ${total.toFixed(2)}</p>
+                    <p className="fs-4">Total: ${total}</p>
                 </div>
                 <div>
                     {

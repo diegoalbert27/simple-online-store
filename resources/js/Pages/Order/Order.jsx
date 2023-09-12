@@ -1,16 +1,11 @@
 import { CiCircleChevRight } from "react-icons/ci";
 import { Link } from "@inertiajs/inertia-react";
 import { useAuth } from "../../hook/useAuth";
+import { useCart } from "../../hook/useCart";
 
 export default function Order({ carts }) {
     const { token } = useAuth()
-
-    const getTotalPriceCart = (cartProducts) => {
-        let totalPriceCart = 0
-        cartProducts.forEach(cartProduct => totalPriceCart += cartProduct.price_product)
-
-        return totalPriceCart.toFixed(2)
-    }
+    const { getTotalPriceCart } = useCart()
 
     const getStatusColor = (status) => {
         const STATUS_COLOR = {
@@ -41,8 +36,8 @@ export default function Order({ carts }) {
             <p className="mb-4 fw-semibold text-secondary">Total de {carts.length} compras</p>
 
             {
-                carts.map((cart) => (
-                    <div className="d-flex rounded gap-4 shadow mb-3">
+                carts.map((cart, index) => (
+                    <div className="d-flex rounded gap-4 shadow mb-3" key={index}>
                         <div className="position-relative" style={{
                             width: '9.9em'
                         }}>
@@ -50,14 +45,14 @@ export default function Order({ carts }) {
                                 cart.cart_product.map((cartProduct, index) => {
                                     if (index <= 2) {
                                         return (
-                                            <img className="position-absolute rounded" src={cartProduct.product.product_imagen[0].url_imagen} width={`${100 - (index * 5)}%`} />
+                                            <img className="position-absolute rounded shadow" key={index} src={cartProduct.product.product_imagen[0].url_imagen} width={`${100 - (index * 5)}%`} />
                                         )
                                     }
                                 })
                             }
                         </div>
                         <div className="flex-fill">
-                            <h2 className="fw-bold mb-0">000{cart.id_cart}</h2>
+                            <h2 className="fw-bold mb-0">#000{cart.id_cart}</h2>
                             <p className={`mb-0 fw-semibold ${getStatusColor(cart.status)}`} style={{
                                 fontSize: '.8rem'
                             }}>{cart.status}</p>
