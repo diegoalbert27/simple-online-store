@@ -3,6 +3,7 @@ import { useCart } from "../../hook/useCart";
 
 export default function Detail({ cart }) {
     const { getTotalPriceCart } = useCart()
+
     return (
         <div className="border p-5 rounded gap-0">
             <div className="d-flex justify-content-between mb-3">
@@ -17,8 +18,8 @@ export default function Detail({ cart }) {
             </div>
 
             {
-                cart.cart_product.map(cartProduct => (
-                    <div className="row shadow mb-3 g-0">
+                cart.cart_product.map((cartProduct, index) => (
+                    <div className="row shadow mb-3 g-0" key={index}>
                         <img className="col-2 border rounded" src={cartProduct.product.product_imagen[0].url_imagen} />
 
                         <div className="col-6 ps-3 m-auto">

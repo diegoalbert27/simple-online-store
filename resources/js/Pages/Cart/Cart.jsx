@@ -25,6 +25,10 @@ export default function Cart() {
             toast.success(response.data.message)
             cleanCart()
         } catch(err) {
+            if (err.response.data.message === 'Unauthenticated.') {
+                return toast.error('Debe identificarse, para completar la orden')
+            }
+
             toast.error(err.response.data.message)
         }
     }
