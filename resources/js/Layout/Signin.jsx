@@ -126,10 +126,10 @@ export function Signin() {
                                         <ErrorMessage className="text-danger" name="password" component="div" />
                                     </div>
 
-                                    <div className="text-center mb-2">
+                                    <div className="text-center mb-2 d-flex">
                                         <button
                                             type="submit"
-                                            className="btn btn-primary"
+                                            className="btn btn-primary flex-fill"
                                             disabled={isSubmitting}
                                         >
                                             Ingresar
@@ -142,7 +142,7 @@ export function Signin() {
                         <div className="text-center">
                             <p className="mb-0">¿No tienes una cuanta aún?</p>
                             <button
-                                className="btn btn-link"
+                                className="btn btn-link p-0"
                                 type="button"
                                 data-bs-dismiss="modal"
                             >

@@ -11,12 +11,7 @@ export default function Cart() {
     const total = getTotalPriceCart(cart.products)
 
     const cleanAllCart = () => {
-        const isConfirmed = window.confirm('Desea eliminar por completo el carro?')
-
-        if (isConfirmed) {
-            cleanCart()
-            toast.success('Eliminado con exito')
-        }
+        cleanCart()
     }
 
     const sendShop = async () => {
