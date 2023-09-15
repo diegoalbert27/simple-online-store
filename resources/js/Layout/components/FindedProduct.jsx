@@ -18,7 +18,7 @@ export function FindedProduct({ product }) {
                 >
                     {product.name}
                 </Link>
-                <p className="mb-0">{product.description.slice(0, 13)}...</p>
+                <p className="mb-0">{product.description.slice(0, 39)}...</p>
             </div>
         </div>
     );

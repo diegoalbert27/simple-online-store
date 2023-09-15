@@ -8,7 +8,7 @@ import { useFilters } from "../hook/useFilters";
 import { useEffect, useContext } from 'react'
 import { ProductContext } from "../context/products";
 
-export default function Welcome({ productsPage, categories }) {
+export default function Welcome({ productsPage, categories, products }) {
     const { filtersProducts, setCategories } = useFilters()
     const filteredProducts = filtersProducts(productsPage.data)
 
@@ -16,7 +16,7 @@ export default function Welcome({ productsPage, categories }) {
 
     useEffect(() => {
         setCategories(categories)
-        setProducts(productsPage.data)
+        setProducts(products)
     }, [])
 
     return (

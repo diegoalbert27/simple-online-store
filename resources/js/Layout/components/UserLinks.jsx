@@ -1,5 +1,5 @@
 import { Link } from "@inertiajs/inertia-react";
-import { CiUser, CiPower, CiShoppingBasket } from "react-icons/ci";
+import { CiUser, CiPower, CiShoppingBasket, CiViewTimeline } from "react-icons/ci";
 
 export function UserLinks({ user, token, logout }) {
     return (
@@ -18,7 +18,7 @@ export function UserLinks({ user, token, logout }) {
                         <div className="border-bottom mx-3 mt-1 mb-1 pb-1">
                             <h2 className="fs-6 mb-0">{user.name}</h2>
                             <div
-                                className="text-secondary"
+                                className="text-secondary fw-light"
                                 style={{
                                     fontSize: ".8rem",
                                 }}
@@ -35,7 +35,19 @@ export function UserLinks({ user, token, logout }) {
                                 href="/orders"
                             >
                                 <CiShoppingBasket className="fs-5" />
-                                <span>Ordenes</span>
+                                <span className="fw-light">Ordenes</span>
+                            </Link>
+
+                            <Link
+                                className="btn fw-semibold p-0 d-flex gap-1 mt-1 align-items-center"
+                                headers={{ Authorization: `Bearer ${token}` }}
+                                style={{
+                                    fontSize: ".93rem",
+                                }}
+                                href="/profile"
+                            >
+                                <CiViewTimeline className="fs-5" />
+                                <span className="fw-light">Perfil</span>
                             </Link>
                         </div>
                     </li>
@@ -49,7 +61,7 @@ export function UserLinks({ user, token, logout }) {
                             onClick={async () => await logout()}
                         >
                             <CiPower className="fs-5" />
-                            <span>Cerrar Sesión</span>
+                            <span className="fw-light">Cerrar Sesión</span>
                         </button>
                     </li>
                 </ul>
