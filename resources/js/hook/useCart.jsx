@@ -7,8 +7,15 @@ export function useCart() {
     const getTotalPriceCart = (products) => {
         let totalPriceCart = 0
         products.forEach(product => {
-            const PRICE = product.price_product === undefined ? 'price' : 'price_product'
-            return totalPriceCart += (product[PRICE]) * product.count
+            const [PRICE, COUNT] = product.price_product === undefined ? [
+                'price',
+                'count'
+            ] : [
+                'price_product',
+                'count_product'
+            ]
+
+            return totalPriceCart += (product[PRICE]) * product[COUNT]
         })
 
         return totalPriceCart.toFixed(2)
