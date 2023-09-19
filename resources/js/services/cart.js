@@ -1,4 +1,4 @@
-import { get, post } from "./services"
+import { post } from "./services"
 
 const cartUrl = '/cart'
 
