@@ -2,7 +2,7 @@ import { useContext } from 'react'
 import { AuthContext } from '../context/auth'
 
 export function useAuth() {
-    const { token, user, logout } = useContext(AuthContext)
+    const { token, user, logout, setUser } = useContext(AuthContext)
 
     const isAuth = () => {
         if (token === null) {
@@ -15,6 +15,7 @@ export function useAuth() {
     return {
         isAuth,
         user,
+        setUser,
         token,
         logout
     }

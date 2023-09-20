@@ -2,6 +2,8 @@ import { Link } from "@inertiajs/inertia-react";
 import { CiUser, CiPower, CiShoppingBasket, CiViewTimeline } from "react-icons/ci";
 
 export function UserLinks({ user, token, logout }) {
+    const header = { Authorization: `Bearer ${token}` }
+
     return (
         <li className="nav-item my-auto">
             <div className="dropstart">
@@ -28,7 +30,7 @@ export function UserLinks({ user, token, logout }) {
 
                             <Link
                                 className="btn fw-semibold p-0 d-flex gap-1 mt-1 align-items-center"
-                                headers={{ Authorization: `Bearer ${token}` }}
+                                headers={header}
                                 style={{
                                     fontSize: ".93rem",
                                 }}
@@ -40,7 +42,7 @@ export function UserLinks({ user, token, logout }) {
 
                             <Link
                                 className="btn fw-semibold p-0 d-flex gap-1 mt-1 align-items-center"
-                                headers={{ Authorization: `Bearer ${token}` }}
+                                headers={header}
                                 style={{
                                     fontSize: ".93rem",
                                 }}

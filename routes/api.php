@@ -22,6 +22,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('/user', [AccountController::class, 'store']);
 Route::post('/user/login', [AccountController::class, 'login']);
+
+Route::middleware('auth:sanctum')->put('/user', [AccountController::class, 'update']);
 Route::middleware('auth:sanctum')->get('/user/logout', [AccountController::class, 'logout']);
 
 Route::middleware('auth:sanctum')->prefix('cart')->group(function () {

@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use Inertia\Inertia;
 use Illuminate\Support\Facades\Hash;
+use Inertia\Inertia;
 
 class AccountController extends Controller
 {
@@ -36,6 +36,41 @@ class AccountController extends Controller
             'data' => [
                 'user' => $user,
                 'token' => $token
+            ]
+        ], 201);
+    }
+
+    public function update(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string',
+            'lastName' => 'required|string',
+            'email' => 'required|email'
+        ]);
+
+        $current_user = $request->user();
+
+        $user = User::where('id_user', '=', $current_user->id_user)->first();
+
+        if (
+            User::where('id_user', '<>', $current_user->id_user)
+                ->where('email', '=', $request->email)
+                ->first()
+        ) {
+            return response()->json([
+                'message' => 'El email ingresado no se encuentra disponible.',
+                'data' => null
+            ], 400);
+        }
+
+        $user->name = "{$request->name} {$request->lastName}";
+        $user->email = $request->email;
+        $user->update();
+
+        return response()->json([
+            'message' => 'Actualizado con exito',
+            'data' => [
+                'user' => $user
             ]
         ], 201);
     }
@@ -81,5 +116,10 @@ class AccountController extends Controller
             'message' => 'Sesion cerrada',
             'data' => null
         ]);
+    }
+
+    public function profile(Request $request)
+    {
+        return Inertia::render('Account/Profile');
     }
 }

@@ -1,4 +1,4 @@
-import { get, post } from "./services"
+import { get, post, put } from "./services"
 import Storage from "./storage"
 
 const accountUrl = '/user'
@@ -9,6 +9,18 @@ export async function createUser(newUser) {
 
         Storage.set('user', response.data.data.user)
         Storage.set('token', response.data.data.token)
+
+        return response
+    } catch (err) {
+        throw(err)
+    }
+}
+
+export async function editUser(newUser) {
+    try {
+        const response = await put(`${accountUrl}/`, newUser, true)
+
+        Storage.set('user', response.data.data.user)
 
         return response
     } catch (err) {
