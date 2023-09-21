@@ -1,4 +1,5 @@
 import { useCart } from "../hook/useCart";
+import { CiSquarePlus, CiSquareMinus } from "react-icons/ci";
 
 export function ProductCount({ product }) {
     const { cart, decreaseAmount, addProductCart } = useCart()
@@ -7,21 +8,27 @@ export function ProductCount({ product }) {
     const count = productCart !== undefined ? productCart.count : 1
 
     return (
-        <div className="d-flex gap-2 align-items-center my-2 w-100">
+        <div className="d-flex gap-1 align-items-center my-2 w-100">
             <p className="my-auto flex-fill">
                 Cantidad: <span className="fw-bold">{count}</span>
             </p>
+
+            {
+                count > 1 && (
+                    <button
+                        className="btn btn-sm p-0"
+                        onClick={() => decreaseAmount(product)}
+                    >
+                        <CiSquareMinus className="fs-3" />
+                    </button>
+                )
+            }
+
             <button
-                className="btn btn-sm btn-secondary px-3"
-                onClick={() => decreaseAmount(product)}
-            >
-                -
-            </button>
-            <button
-                className="btn btn-sm btn-secondary px-3"
+                className="btn btn-sm p-0"
                 onClick={() => addProductCart(product)}
             >
-                +
+                <CiSquarePlus className="fs-3" />
             </button>
         </div>
     );

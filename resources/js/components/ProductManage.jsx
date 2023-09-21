@@ -2,11 +2,13 @@ import { useCart } from "../hook/useCart";
 
 import toast, { Toaster } from 'react-hot-toast';
 
+import { CiShoppingBasket, CiTrash } from "react-icons/ci";
+
 export function ProductManage({ product }) {
     const { hasProduct, addProductCart, removeProductCart } = useCart();
 
     const isProductInToCart = hasProduct(product);
-    const typeButton = isProductInToCart ? 'danger' : 'success'
+    const typeButton = isProductInToCart ? 'danger' : 'secondary'
 
     return (
         <>
@@ -23,8 +25,8 @@ export function ProductManage({ product }) {
             >
                 {
                     isProductInToCart ?
-                        'Sacar del carro' :
-                        'Agregar al carro'
+                        <CiTrash className="fs-3" /> :
+                        <CiShoppingBasket className="fs-3" />
                 }
             </button>
 

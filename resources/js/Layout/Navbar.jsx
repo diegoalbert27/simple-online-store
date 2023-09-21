@@ -11,7 +11,7 @@ export function Navbar() {
     const { cart } = useCart()
 
     return (
-        <nav className="navbar bg-body-tertiary navbar-expand-lg position-sticky top-0" style={{
+        <nav className="navbar bg-body-tertiary navbar-expand-lg position-sticky top-0 shadow-sm" style={{
             zIndex: '1000'
         }}>
             <div className="container">

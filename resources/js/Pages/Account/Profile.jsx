@@ -49,7 +49,7 @@ export default function Profile() {
     return (
         <div className="d-flex justify-content-center">
             <div className="p-4 rounded shadow text-center mt-4 w-50">
-                <span className="px-2 py-3 bg-dark text-white rounded-circle shadow">
+                <span className="px-2 py-3 bg-dark bg-gradient text-white rounded-circle shadow avatar-profile">
                     <CiUser className="fs-1" />
                 </span>
 
@@ -108,7 +108,9 @@ export default function Profile() {
                                             <button className="btn btn-secondary me-2" onClick={() => setShowProfile(true)} type="button">
                                                 Cancelar
                                             </button>
-                                            <button className="btn btn-primary" type="submit" disabled={isSubmitting}>Editar</button>
+                                            <button className="btn btn-primary" type="submit" disabled={isSubmitting}>
+                                                Editar
+                                            </button>
                                         </div>
                                     </Form>
                                 )

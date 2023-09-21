@@ -1,7 +1,7 @@
 import { Link } from "@inertiajs/inertia-react";
 import { useCart } from "../../hook/useCart";
 
-import { CiTrash, CiCircleCheck } from "react-icons/ci";
+import { CiTrash, CiCircleCheck, CiRedo } from "react-icons/ci";
 import toast, { Toaster } from "react-hot-toast";
 import { createCart } from "../../services/cart";
 
@@ -46,7 +46,7 @@ export default function Cart() {
                         total > 0 && (
                             <>
                                 <button className="border-0 bg-white me-2" onClick={cleanAllCart}>
-                                    <CiTrash className="fs-3" />
+                                    <CiRedo className="fs-3" />
                                 </button>
                                 <button className="btn btn-primary" onClick={sendShop}>
                                     <CiCircleCheck className="fs-3" /> Finalizar Compra
@@ -90,7 +90,9 @@ export default function Cart() {
                         </div>
                         <div className="col-3 flex-grow-1 my-auto text-center">
                             <span className="fw-bold fs-5 me-3 mb-0">${product.price}</span>
-                            <button className="btn btn-danger" onClick={() => removeProductCart(product)}>Eliminar</button>
+                            <button className="btn btn-danger" onClick={() => removeProductCart(product)}>
+                                <CiTrash className="fs-3" />
+                            </button>
                         </div>
                     </div>
                 ))}

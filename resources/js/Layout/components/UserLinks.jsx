@@ -8,7 +8,7 @@ export function UserLinks({ user, token, logout }) {
         <li className="nav-item my-auto">
             <div className="dropstart">
                 <button
-                    className="rounded-circle bg-black border-0"
+                    className="rounded-circle bg-dark bg-gradient border-0"
                     type="button"
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
