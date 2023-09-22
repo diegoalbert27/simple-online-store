@@ -4,6 +4,8 @@ import { FindedProduct } from './FindedProduct';
 
 import { CiSearch } from 'react-icons/ci'
 
+import './Search.css'
+
 export function Search() {
     const { products } = useContext(ProductContext)
 
@@ -32,7 +34,7 @@ export function Search() {
     }
 
     return (
-        <form className="d-flex flex-fill justify-content-center gap-0" role="search">
+        <form className="d-flex flex-fill justify-content-md-center gap-0" role="search">
             <span className='my-auto fs-4 border border-end-0 ps-2 pb-2 pe-2 rounded rounded-end-0'>
                 <CiSearch />
             </span>
@@ -47,11 +49,7 @@ export function Search() {
             />
 
             <div
-                className={`position-absolute top-100 bg-white p-2 rounded ${showFindedProduct} overflow-auto shadow`}
-                style={{
-                    width: "36.50%",
-                    height: '25rem'
-                }}
+                className={`position-absolute top-100 bg-white p-2 rounded ${showFindedProduct} overflow-auto shadow search`}
             >
                 {productsFinded.map((product) => (
                     <FindedProduct product={product} key={product.id_product} />

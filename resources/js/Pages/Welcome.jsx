@@ -23,7 +23,7 @@ export default function Welcome({ productsPage, categories, products }) {
         <>
             <Header />
 
-            <div className="mt-4 mb-3">
+            <div className="mb-3">
                 <Products products={filteredProducts} />
 
                 <div className="d-flex justify-content-center">

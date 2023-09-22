@@ -22,7 +22,7 @@ export function Filters() {
     }
 
     return (
-        <div className="d-flex justify-content-between my-4">
+        <div className="d-flex flex-column flex-md-row justify-content-between mt-4">
             <div className='d-flex align-items-center gap-2'>
                 <label htmlFor={price}>Precio a partir de</label>
                 <input
@@ -35,7 +35,7 @@ export function Filters() {
                 <span>${filters.minPrice}</span>
             </div>
 
-            <div className='d-flex align-items-center gap-2 w-25'>
+            <div className='d-flex align-items-center gap-2 mt-3 mt-md-0'>
                 <label htmlFor={category}>Categoria</label>
                 <select
                     className="form-select"

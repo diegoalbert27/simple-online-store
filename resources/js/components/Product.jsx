@@ -5,15 +5,13 @@ import { ProductManage } from "./ProductManage";
 
 import { CiViewTimeline } from "react-icons/ci";
 
+import './Product.css'
+
 export function Product({ product }) {
     const { hasProduct } = useCart()
 
     return (
-        <div
-            style={{
-                width: "23.3%",
-            }}
-        >
+        <div className="product mt-4">
             <div className="card border-0 shadow">
                 <img
                     className="border rounded bg-secondary"

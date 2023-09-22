@@ -1,7 +1,7 @@
 import Storage from "../services/storage";
 
 export const cartInitialState = Storage.get('cart') || {
-    status: STATUS_CART[0],
+    status: 'ESPERA',
     products: [],
     user: null
 }

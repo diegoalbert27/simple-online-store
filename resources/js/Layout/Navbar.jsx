@@ -15,9 +15,11 @@ export function Navbar() {
             zIndex: '1000'
         }}>
             <div className="container">
-                <Link className="navbar-brand" href="/">
+                <Link className="navbar-brand m-auto mb-1 mb-md-0" href="/">
                     Simple Online Store
                 </Link>
+
+                <Search />
 
                 <button
                     className="navbar-toggler"
@@ -31,10 +33,8 @@ export function Navbar() {
                     <span className="navbar-toggler-icon"></span>
                 </button>
 
-                <Search />
-
                 <div className="collapse navbar-collapse flex-grow-0" id="navbarNav">
-                    <ul className="navbar-nav">
+                    <ul className="navbar-nav mt-3">
                         <li className="nav-item">
                             <Link className="nav-link " href="/cart" title="Carrito de compras">
                                 <span className="position-relative me-2">
