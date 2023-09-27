@@ -1,5 +1,6 @@
 import { Link } from "@inertiajs/inertia-react";
 import { useState } from 'react'
+import { flushSync } from 'react-dom'
 import { useCart } from "../../hook/useCart";
 
 import { Products } from '../../components/Products'
@@ -13,7 +14,13 @@ export default function Details({ product, productsSimilars }) {
 
     const [imagenPreview, setImagenPreview] = useState(product.product_imagen[0].url_imagen)
 
-    const viewImagenPreview = (imagen) => setImagenPreview(imagen.url_imagen)
+    const viewImagenPreview = (imagen) => {
+        document.startViewTransition(() => {
+            flushSync(() => {
+                setImagenPreview(imagen.url_imagen)
+            })
+        })
+    }
     const imagenPreviewActive = (imagen) => imagen.url_imagen === imagenPreview ? 'border border-4 border-primary' : ''
 
     return (
