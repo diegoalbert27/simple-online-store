@@ -88,7 +88,7 @@ export default function Cart() {
                             />
                             <button className="btn border px-3" onClick={() => addProductCart(product)}>+</button>
                         </div>
-                        <div className="col-12 col-xl-3 mb-2 my-auto text-center">
+                        <div className="col-12 col-xl-3 my-auto text-center">
                             <span className="fw-bold fs-5 me-3 mb-0">${product.price}</span>
                             <button className="btn btn-danger" onClick={() => removeProductCart(product)}>
                                 <CiTrash className="fs-3" />
