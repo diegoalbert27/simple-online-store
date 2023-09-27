@@ -90,7 +90,7 @@ export default function Cart() {
                         </div>
                         <div className="col-12 col-xl-3 my-auto text-center">
                             <span className="fw-bold fs-5 me-3 mb-0">${product.price}</span>
-                            <button className="btn btn-danger" onClick={() => removeProductCart(product)}>
+                            <button className="btn btn-danger mb-2 mb-md-0" onClick={() => removeProductCart(product)}>
                                 <CiTrash className="fs-3" />
                             </button>
                         </div>
