@@ -25,8 +25,8 @@ export default function Order({ carts }) {
 
             {
                 carts.map((cart, index) => (
-                    <div className="d-flex rounded gap-2 gap-md-4 shadow mb-3" key={index}>
-                        <div className="position-relative my-3 my-md-0" style={{
+                    <div className="d-flex rounded gap-2 gap-md-4 shadow mb-4" key={index}>
+                        <div className="position-relative" style={{
                             width: '9.9rem'
                         }}>
                             {
