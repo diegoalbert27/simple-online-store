@@ -2,6 +2,7 @@ import { CiCircleChevRight } from "react-icons/ci";
 import { Link } from "@inertiajs/inertia-react";
 import { useAuth } from "../../hook/useAuth";
 import { useCart } from "../../hook/useCart";
+import { getFormatDate } from "../../utils/helpers";
 
 export default function Order({ carts }) {
     const { token } = useAuth()
@@ -17,29 +18,16 @@ export default function Order({ carts }) {
         return STATUS_COLOR[status]
     }
 
-    const getFormatDate = (formatDate) => {
-        const date = new Date(formatDate)
-        const year = date.getFullYear()
-        const month = date.getMonth() + 1
-        const day = date.getDay()
-
-        const addZeroDate = (date) => (
-            date <= 10 ? `0${date}` : date
-        )
-
-        return `${addZeroDate(day)}-${addZeroDate(month)}-${year}`
-    }
-
     return (
-        <div className="border rounded p-5 mb-4">
+        <div className="border rounded p-4 p-md-5 mb-4">
             <h1 className="fw-normal mb-0">Lista de compras</h1>
             <p className="mb-4 fw-semibold text-secondary">Total de {carts.length} compras</p>
 
             {
                 carts.map((cart, index) => (
-                    <div className="d-flex rounded gap-4 shadow mb-3" key={index}>
-                        <div className="position-relative" style={{
-                            width: '9.9em'
+                    <div className="d-flex rounded gap-2 gap-md-4 shadow mb-3" key={index}>
+                        <div className="position-relative my-3 my-md-0" style={{
+                            width: '9.9rem'
                         }}>
                             {
                                 cart.cart_product.map((cartProduct, index) => {
@@ -64,7 +52,7 @@ export default function Order({ carts }) {
                                 <span className="">Total: ${getTotalPriceCart(cart.cart_product)}</span>
                             </div>
                         </div>
-                        <div className="m-auto pe-5">
+                        <div className="m-auto pe-0 pe-md-3 pe-xl-5">
                             <Link className="btn" href={`/orders/${cart.id_cart}`} headers={{ 'Authorization': `Bearer ${token}` }} >
                                 <CiCircleChevRight className="fs-2" />
                             </Link>

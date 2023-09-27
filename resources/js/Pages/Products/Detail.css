@@ -1,0 +1,17 @@
+.product-imagen {
+    height: 460px;
+}
+
+@media screen and (max-width: 479px) {
+    .product-imagen {
+        width: 100%;
+        height: 18rem;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .product-imagen {
+        width: 100%;
+        height: 18rem;
+    }
+}

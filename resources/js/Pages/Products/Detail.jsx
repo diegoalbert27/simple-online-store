@@ -6,6 +6,8 @@ import { Products } from '../../components/Products'
 import { ProductCount } from '../../components/ProductCount';
 import { ProductManage } from '../../components/ProductManage';
 
+import './Detail.css'
+
 export default function Details({ product, productsSimilars }) {
     const { hasProduct } = useCart()
 
@@ -16,11 +18,11 @@ export default function Details({ product, productsSimilars }) {
 
     return (
         <>
-            <div className="row mb-3">
-                <div className="col-6">
-                    <img className="rounded" src={imagenPreview} height={400} />
+            <div className="row g-0">
+                <div className="col-12 col-xl-6">
+                    <img className="rounded product-imagen" src={imagenPreview} />
 
-                    <div className="mt-2 d-flex gap-2">
+                    <div className="mt-2 d-flex justify-content-center justify-content-xl-start gap-2">
                         {
                             product.product_imagen.map(imagen => {
                                 return (
@@ -33,7 +35,7 @@ export default function Details({ product, productsSimilars }) {
                     </div>
                 </div>
 
-                <div className="col-6 border rounded d-flex align-items-start flex-column mb-3 p-3">
+                <div className="col-12 col-xl-6 mt-3 mt-xl-0 border rounded d-flex align-items-start flex-column mb-3 p-3">
                     <div className="mb-auto">
                         <h1 className="text-uppercase">{product.name}</h1>
                         <p className="mb-0">{product.description}</p>
@@ -54,14 +56,14 @@ export default function Details({ product, productsSimilars }) {
 
             {
                 productsSimilars.length > 0 && (
-                    <div className='my-5'>
+                    <div className='my-xl-4'>
                         <h2 className='fw-light'>Productos Similares</h2>
                         <Products products={productsSimilars} />
                     </div>
                 )
             }
 
-            <div className="text-center mb-3">
+            <div className="text-center mt-3 mt-md-0 mb-3">
                 <Link href="/">Ver mas productos</Link>
             </div>
         </>

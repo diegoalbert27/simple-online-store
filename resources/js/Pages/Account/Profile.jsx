@@ -48,14 +48,14 @@ export default function Profile() {
 
     return (
         <div className="d-flex justify-content-center">
-            <div className="p-4 rounded shadow text-center mt-4 w-50">
-                <span className="px-2 py-3 bg-dark bg-gradient text-white rounded-circle shadow avatar-profile">
+            <div className="p-4 rounded shadow text-center mt-4">
+                <span className="py-3 px-3 px-xl-2 py-xl-3 bg-dark bg-gradient text-white rounded-circle shadow avatar-profile">
                     <CiUser className="fs-1" />
                 </span>
 
                 {
                     showProfile && (
-                        <div className="my-2">
+                        <div className="my-3">
                             <h2 className="fs-4 mb-0">{user.name}</h2>
                             <p className="mb-0 text-secondary">{user.email}</p>
                         </div>

@@ -29,11 +29,11 @@ export default function Cart() {
     }
 
     return (
-        <div className="border p-5 rounded mb-4">
+        <div className="border p-3 p-md-5 rounded mb-4">
             <div className="mb-2">
                 <Link href="/">Continuar Comprando</Link>
             </div>
-            <div className="d-flex justify-content-between">
+            <div className="d-flex flex-column flex-md-row justify-content-md-between">
                 <div>
                     <h2>Carrito de compras</h2>
                     <p className="mb-1">
@@ -41,7 +41,7 @@ export default function Cart() {
                     </p>
                     <p className="fs-4">Total: ${total}</p>
                 </div>
-                <div>
+                <div className="text-center text-md-start">
                     {
                         total > 0 && (
                             <>
@@ -56,29 +56,29 @@ export default function Cart() {
                     }
                 </div>
             </div>
-            <div className="mt-3">
+            <div className="mt-4 mt-md-2">
                 {cart.products.map((product) => (
                     <div className="row g-0 rounded border mb-3" key={product.id_product}>
-                        <div className="col-6 flex-grow-1 d-flex gap-3">
+                        <div className="col-12 col-md-6 flex-grow-1 d-flex gap-3">
                             <img
                                 className="rounded"
                                 src={product.product_imagen[0].url_imagen}
                                 height={100}
                                 width={100}
                             />
-                            <div className="my-auto">
+                            <div className="my-auto w-50">
                                 <h3 className="fs-4 text-capitalize mb-0">
                                     {product.name}
                                 </h3>
-                                <p className="text-secondary text-sm mb-0 text-truncate">
+                                <p className="text-secondary text-truncate text-sm mb-0 text-truncate">
                                     {product.description}
                                 </p>
                                 <Link href={`/products/${product.id_product}`}>
-                                    Detalles
+                                    Ver producto
                                 </Link>
                             </div>
                         </div>
-                        <div className="col-3 d-flex gap-3 align-items-center justify-content-center w-25">
+                        <div className="col-12 my-3 my-md-0 col-md-5 col-xl-3 d-flex gap-3 align-items-center justify-content-center">
                             <button className="btn border px-3" onClick={() => decreaseAmount(product)}>-</button>
                             <input
                                 className="form-control text-center w-25"
@@ -88,7 +88,7 @@ export default function Cart() {
                             />
                             <button className="btn border px-3" onClick={() => addProductCart(product)}>+</button>
                         </div>
-                        <div className="col-3 flex-grow-1 my-auto text-center">
+                        <div className="col-12 col-xl-3 mb-2 my-auto text-center">
                             <span className="fw-bold fs-5 me-3 mb-0">${product.price}</span>
                             <button className="btn btn-danger" onClick={() => removeProductCart(product)}>
                                 <CiTrash className="fs-3" />

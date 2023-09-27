@@ -19,7 +19,7 @@ export function ProductCount({ product }) {
                         className="btn btn-sm p-0"
                         onClick={() => decreaseAmount(product)}
                     >
-                        <CiSquareMinus className="fs-3" />
+                        <CiSquareMinus className="fs-2" />
                     </button>
                 )
             }
@@ -28,7 +28,7 @@ export function ProductCount({ product }) {
                 className="btn btn-sm p-0"
                 onClick={() => addProductCart(product)}
             >
-                <CiSquarePlus className="fs-3" />
+                <CiSquarePlus className="fs-2" />
             </button>
         </div>
     );

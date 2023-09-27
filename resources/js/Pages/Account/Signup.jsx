@@ -42,7 +42,7 @@ export default function Signup() {
 
     return (
         <div className="row">
-            <div className="col-6">
+            <div className="col-12 col-md-6">
                 <h2>Crear una cuenta</h2>
 
                 <Formik
@@ -73,7 +73,7 @@ export default function Signup() {
                             <div className="bg-light p-4 rounded mb-3">
                                 <h3 className="fs-5">Informacion Personal</h3>
                                 <div className="row">
-                                    <div className="col">
+                                    <div className="col-md-12 col-xl-6">
                                         <label htmlFor="name">Nombre</label>
                                         <Field
                                             className={`form-control ${checkInput(errors, touched, 'name')}`}
@@ -83,7 +83,7 @@ export default function Signup() {
                                         />
                                         <ErrorMessage className="text-danger" name="name" component="div" />
                                     </div>
-                                    <div className="col">
+                                    <div className="col-md-12 mt-md-2 mt-xl-0 col-xl-6">
                                         <label htmlFor="last-name">
                                             Apellido
                                         </label>
@@ -116,7 +116,7 @@ export default function Signup() {
                                     </div>
                                 </div>
                                 <div className="row">
-                                    <div className="col-6">
+                                    <div className="col-md-12 col-xl-6">
                                         <label htmlFor="password">
                                             Contraseña
                                         </label>
@@ -129,7 +129,7 @@ export default function Signup() {
                                         />
                                         <ErrorMessage className="text-danger" name="password" component="div" />
                                     </div>
-                                    <div className="col-6">
+                                    <div className="col-md-12 mt-md-2 mt-xl-0 col-xl-6">
                                         <label htmlFor="repeat-password">
                                             Repetir Contraseña
                                         </label>
@@ -162,8 +162,11 @@ export default function Signup() {
                     )}
                 </Formik>
             </div>
-            <div className="col-6 my-auto">
-                <img src={SignupImage} height={500} width="100%" />
+            <div className="col-12 d-none d-md-block col-md-6 my-auto">
+                <img src={SignupImage} style={{
+                    width: '100%',
+                    height: '35rem'
+                }} />
             </div>
 
             <Toaster
