@@ -35,7 +35,7 @@ export function Search() {
 
     return (
         <form className="d-flex flex-fill justify-content-md-center gap-0" role="search">
-            <span className='my-auto fs-4 border border-end-0 ps-2 pb-2 pe-2 rounded rounded-end-0'>
+            <span className='my-auto fs-4 border border-end-0 ps-2 pb-2 pe-2 rounded rounded-end-0 bg-primary-subtle'>
                 <CiSearch />
             </span>
 

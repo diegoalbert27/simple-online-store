@@ -11,11 +11,11 @@ export function Navbar() {
     const { cart } = useCart()
 
     return (
-        <nav className="navbar bg-body-tertiary navbar-expand-lg position-sticky top-0 shadow-sm" style={{
+        <nav className="navbar bg-body-secondary navbar-expand-lg position-sticky top-0 shadow-sm" style={{
             zIndex: '1000'
         }}>
             <div className="container">
-                <Link className="navbar-brand m-auto mb-1 mb-md-0" href="/">
+                <Link className="navbar-brand m-auto" href="/">
                     Simple Online Store
                 </Link>
 
