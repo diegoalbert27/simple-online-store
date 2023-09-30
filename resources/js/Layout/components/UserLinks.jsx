@@ -60,7 +60,10 @@ export function UserLinks({ user, token, logout }) {
                                 fontSize: ".93rem",
                             }}
                             type="button"
-                            onClick={async () => await logout()}
+                            onClick={async () => {
+                                await logout()
+                                window.location.reload()
+                            }}
                         >
                             <CiPower className="fs-5" />
                             <span className="fw-light">Cerrar Sesión</span>
