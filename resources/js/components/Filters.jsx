@@ -43,7 +43,7 @@ export function Filters() {
                     value={filters.category}
                     onChange={handlerCategory}
                 >
-                    <option value="all">todos</option>
+                    <option value="all">Todos</option>
                     {categories.map((category, index) => (
                         <option key={index} value={category.name}>
                             {category.name}
