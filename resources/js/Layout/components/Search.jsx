@@ -15,7 +15,7 @@ export function Search() {
     const [showResult, setShowResult] = useState(false)
 
     const searchProduct = (event) => {
-        const keywordsFindProducts = event.target.value
+        const keywordsFindProducts = event.target.value.toLowerCase()
 
         setShowResult(true)
 

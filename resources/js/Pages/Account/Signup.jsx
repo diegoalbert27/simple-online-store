@@ -73,7 +73,7 @@ export default function Signup() {
                             <div className="bg-light p-4 rounded mb-3">
                                 <h3 className="fs-5">Informacion Personal</h3>
                                 <div className="row">
-                                    <div className="col-md-12 col-xl-6">
+                                    <div className="col-md-12 col-xl-6 mb-2 mb-md-0">
                                         <label htmlFor="name">Nombre</label>
                                         <Field
                                             className={`form-control ${checkInput(errors, touched, 'name')}`}
@@ -83,7 +83,7 @@ export default function Signup() {
                                         />
                                         <ErrorMessage className="text-danger" name="name" component="div" />
                                     </div>
-                                    <div className="col-md-12 mt-md-2 mt-xl-0 col-xl-6">
+                                    <div className="col-md-12 mb-2 mt-md-2 mt-xl-0 col-xl-6">
                                         <label htmlFor="last-name">
                                             Apellido
                                         </label>
@@ -116,7 +116,7 @@ export default function Signup() {
                                     </div>
                                 </div>
                                 <div className="row">
-                                    <div className="col-md-12 col-xl-6">
+                                    <div className="col-md-12 col-xl-6 mb-2 mb-md-0">
                                         <label htmlFor="password">
                                             Contraseña
                                         </label>
