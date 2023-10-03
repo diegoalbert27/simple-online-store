@@ -10,7 +10,7 @@ import { ProductContext } from "../context/products";
 
 export default function Welcome({ productsPage, categories, products }) {
     const { filtersProducts, setCategories } = useFilters()
-    const filteredProducts = filtersProducts(productsPage.data)
+    const filteredProducts = filtersProducts(products)
 
     const { setProducts } = useContext(ProductContext)
 
