@@ -12,9 +12,12 @@ export function Search() {
     const [productsFinded, setProductsFinded] = useState([])
 
     const showFindedProduct = productsFinded.length > 0 ? '' : 'd-none'
+    const [showResult, setShowResult] = useState(false)
 
     const searchProduct = (event) => {
         const keywordsFindProducts = event.target.value
+
+        setShowResult(true)
 
         if (keywordsFindProducts === '') {
             return setProductsFinded([])
@@ -48,13 +51,15 @@ export function Search() {
                 onFocus={searchProduct}
             />
 
-            <div
-                className={`position-absolute top-100 bg-white p-2 rounded ${showFindedProduct} overflow-auto shadow search`}
-            >
-                {productsFinded.map((product) => (
-                    <FindedProduct product={product} key={product.id_product} />
-                ))}
-            </div>
+            {
+                showResult && <div
+                    className={`position-absolute top-100 bg-white p-2 rounded ${showFindedProduct} overflow-auto shadow search`}
+                >
+                    {productsFinded.map((product) => (
+                        <FindedProduct product={product} key={product.id_product} setShowResult={setShowResult} />
+                    ))}
+                </div>
+            }
         </form>
     );
 }

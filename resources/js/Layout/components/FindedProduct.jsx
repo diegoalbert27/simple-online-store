@@ -1,6 +1,6 @@
 import { Link } from "@inertiajs/inertia-react";
 
-export function FindedProduct({ product }) {
+export function FindedProduct({ product, setShowResult }) {
     return (
         <div
             className="d-flex gap-2 border-bottom mb-1 pb-1"
@@ -15,6 +15,7 @@ export function FindedProduct({ product }) {
                 <Link
                     className="text-capitalize"
                     href={`/products/${product.id_product}`}
+                    onClick={() => setShowResult(false)}
                 >
                     {product.name}
                 </Link>
