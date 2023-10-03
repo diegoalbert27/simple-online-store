@@ -7,7 +7,7 @@ export function Pagination({ links }) {
     return (
         <>
             {links.length > 3 && (
-                <ul className="pagination mt-4">
+                <ul className="pagination pagination-sm mt-4">
                     {links.map((link, index) => {
                         return link.url === null ? (
                             <li className="page-item disabled" key={index}>
