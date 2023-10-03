@@ -29,7 +29,7 @@ export default function Details({ product, productsSimilars }) {
                 <div className="col-12 col-xl-6">
                     <img className="rounded product-imagen" src={imagenPreview} />
 
-                    <div className="mt-2 d-flex justify-content-center justify-content-xl-start gap-2">
+                    <div className="mt-2 d-flex justify-content-center justify-content-xl-start gap-2 p-2 overflow-x-auto me-4">
                         {
                             product.product_imagen.map(imagen => {
                                 return (

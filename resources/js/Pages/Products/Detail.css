@@ -1,5 +1,6 @@
 .product-imagen {
     height: 410px;
+    width: 95%;
 }
 
 @media screen and (max-width: 479px) {
