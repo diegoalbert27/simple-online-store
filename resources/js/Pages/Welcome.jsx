@@ -10,7 +10,7 @@ import { ProductContext } from "../context/products";
 
 export default function Welcome({ productsPage, categories, products }) {
     const { filtersProducts, setCategories } = useFilters()
-    const filteredProducts = filtersProducts(productsPage.data)
+    const filteredProducts = filtersProducts(products)
 
     const { setProducts } = useContext(ProductContext)
 
@@ -24,11 +24,17 @@ export default function Welcome({ productsPage, categories, products }) {
             <Header />
 
             <div className="mb-3">
-                <Products products={filteredProducts} />
+                {
+                    filteredProducts.length > 0 ?
+                        <Products products={filteredProducts} /> :
+                        <>
+                            <Products products={productsPage.data} />
 
-                <div className="d-flex justify-content-center">
-                    <Pagination links={productsPage.links} />
-                </div>
+                            <div className="d-flex justify-content-center">
+                                <Pagination links={productsPage.links} />
+                            </div>
+                        </>
+                }
             </div>
         </>
     );
