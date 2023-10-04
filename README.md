@@ -1,5 +1,72 @@
+
 # Simple Online Store
 
-Simple online store es una tienda en linea hecha en Laravel + React que incluye la muestra de productos, integra un carrito de compras con la autenticacion y registro de usuario
+Simple online store is a e-commerce made in Laravel + React. 
 
-Esta es una App desarrollada con fines educativos y la validacion de conocimientos para el portafolio. Sientase libre de usarla <3
+![Simple Online Store Website](https://user-images.githubusercontent.com/48531350/272439408-19967cbc-64f3-4d31-9c0f-e469a476d25f.png)
+
+## Features
+- Show products and filters
+- Cart Shopping
+- Signin and Signup
+
+![Simple Online Store Website](https://user-images.githubusercontent.com/48531350/272437822-fbe5fbe9-3d7a-4a45-b882-dc0e596e04a0.png)
+
+## Install
+Steps for download and instalation
+
+### Requirements
+- PHP 8.1
+- Laravel
+- MySql
+- Composer
+- NPM
+
+### Download
+
+download zip or clone project
+```bash
+git clone https://github.com/diegoalbert27/simple-online-store.git
+```
+
+### Install Dependencies
+```bash
+composer install
+```
+After
+```bash
+npm install
+```
+
+### Add credentials database
+.env.example rename as .env
+```text
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=simple-online-store
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+### Generate key for project
+```bash
+php artisan key:generate
+```
+
+### Execute migrations for database with seeders
+```bash
+php artisan migrate:refresh --seed
+```
+
+### Run server development with artisan
+```bash
+php artisan serve
+```
+
+## Acknowledgements
+This personal project was development for the edutacion and learning.
+
+MIT License
+
+Made with ❤️
