@@ -6,7 +6,7 @@ export function useFilters() {
 
     const filtersProducts = (products) => {
         return products.filter(product => (
-            product.price >= filters.minPrice || (
+            product.price >= filters.minPrice && (
                 product.category.name === filters.category
             )
         ))
