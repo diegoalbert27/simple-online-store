@@ -64,6 +64,16 @@ php artisan migrate:refresh --seed
 php artisan serve
 ```
 
+### Run server vite with react
+```bash
+npm run dev
+```
+
+### Build React App
+```bash
+npm run build
+```
+
 ## Acknowledgements
 This personal project was development for the edutacion and learning 🧠.
 
