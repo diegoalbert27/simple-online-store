@@ -26,18 +26,17 @@ export default function Order({ carts }) {
             {
                 carts.map((cart, index) => (
                     <div className="d-flex rounded gap-2 gap-md-4 shadow mb-4" key={index}>
-                        <div className="position-relative" style={{
+                        <div className="" style={{
                             width: '9.9rem'
                         }}>
-                            {
-                                cart.cart_product.map((cartProduct, index) => {
-                                    if (index <= 2) {
-                                        return (
-                                            <img className="position-absolute rounded shadow" key={index} src={cartProduct.product.product_imagen[0].url_imagen} width={`${100 - (index * 5)}%`} />
-                                        )
-                                    }
-                                })
-                            }
+                            <img
+                                className="rounded shadow" key={index}
+                                src={cart.cart_product[0].product.product_imagen[0].url_imagen}
+                                style={{
+                                    width: '100%',
+                                    height: '100%',
+                                }}
+                            />
                         </div>
                         <div className="flex-fill">
                             <h2 className="fw-bold mb-0">#000{cart.id_cart}</h2>
