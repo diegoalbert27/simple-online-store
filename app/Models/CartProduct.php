@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class CartProduct extends Model
 {
@@ -13,9 +13,9 @@ class CartProduct extends Model
     protected $table = 'cart_product';
     protected $primaryKey = 'id_cart_product';
 
-    public function product() : HasOne
+    public function product() : BelongsTo
     {
-        return $this->hasOne(Product::class, 'id_product')
+        return $this->belongsTo(Product::class, 'id_product')
             ->with('category')
             ->with('productImagen');
     }
