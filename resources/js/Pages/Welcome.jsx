@@ -19,8 +19,6 @@ export default function Welcome({ productsPage, categories, products }) {
         setProducts(products)
     }, [])
 
-    console.log(filters)
-
     return (
         <>
             <Header />
