@@ -1,7 +1,7 @@
 
 # Simple Online Store :department_store:
 
-Simple online store is a e-commerce made in Laravel + React 👨‍💻. 
+Simple online store is an e-commerce made in Laravel + React 👨‍💻. 
 
 ![Simple Online Store Website](https://user-images.githubusercontent.com/48531350/272439408-19967cbc-64f3-4d31-9c0f-e469a476d25f.png)
 
