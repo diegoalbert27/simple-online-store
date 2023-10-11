@@ -75,7 +75,7 @@ npm run build
 ```
 
 ## Acknowledgements
-This personal project was development for the edutacion and learning 🧠.
+This personal project was development for the education and learning 🧠.
 
 MIT License
 
