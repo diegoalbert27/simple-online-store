@@ -18,7 +18,7 @@ Steps for download and instalation
 ### Requirements
 - PHP 8.1
 - Laravel
-- MySql
+- PostgreSQL
 - Composer
 - NPM
 
@@ -41,11 +41,11 @@ npm install
 ### Add credentials database
 .env.example rename as .env
 ```text
-DB_CONNECTION=mysql
+DB_CONNECTION=pgsql
 DB_HOST=127.0.0.1
-DB_PORT=3306
+DB_PORT=5432
 DB_DATABASE=simple-online-store
-DB_USERNAME=root
+DB_USERNAME=postgres
 DB_PASSWORD=
 ```
 
