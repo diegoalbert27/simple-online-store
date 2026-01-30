@@ -20,7 +20,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/user', [AccountController::class, 'store']);
+Route::post('/user/register', [AccountController::class, 'store']);
 Route::post('/user/login', [AccountController::class, 'login']);
 
 Route::middleware('auth:sanctum')->put('/user', [AccountController::class, 'update']);

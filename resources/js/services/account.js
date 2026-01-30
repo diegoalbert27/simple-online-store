@@ -5,7 +5,7 @@ const accountUrl = '/user'
 
 export async function createUser(newUser) {
     try {
-        const response = await post(`${accountUrl}/`, newUser)
+        const response = await post(`${accountUrl}/register`, newUser)
 
         Storage.set('user', response.data.data.user)
         Storage.set('token', response.data.data.token)
